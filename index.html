@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <title>Data story with flourish</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="how-to-make-a-story" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        color: #1d1d1d;
+      }
+
+      .wrapper {
+        padding: 96px 0;
+      }
+
+      .font-secondary {
+        font-family: "Lora", serif !important;
+      }
+
+      .text-h1 {
+        font-size: 36px;
+        line-height: 52px;
+
+        @media (min-width: @screen-sm-min) {
+          font-size: 32px;
+          line-height: 48px;
+        }
+      }
+
+      .text-h2 {
+        font-size: 32px;
+        line-height: 36px;
+        font-weight: 500;
+
+        @media (min-width: @screen-sm-min) {
+          font-size: 28px;
+          line-height: 32px;
+        }
+      }
+      .figcaption {
+        font-size: 13px;
+        line-height: 22px;
+      }
+
+      .text-body-1 {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 32px;
+
+        @media (min-width: @screen-sm-min) {
+          font-size: 18px;
+          line-height: 28px;
+        }
+      }
+
+      .text-body-2 {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 28px;
+
+        @media (min-width: @screen-sm-min) {
+          font-size: 14px;
+          line-height: 24px;
+        }
+      }
+
+      .blockquote {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 36px;
+        text-transform: uppercase;
+        text-align: center;
+
+        @media (min-width: @screen-sm-min) {
+          font-size: 28px;
+        }
+      }
+
+      .text-caption {
+        font-size: 14px;
+        line-height: 22px;
+
+        @media (min-width: @screen-sm-min) {
+          font-size: 12px;
+          line-height: 18px;
+        }
+      }
+
+      a {
+        color: #104e8b !important;
+        border-bottom: 2px solid #104e8b;
+        text-decoration: none;
+        word-break: break-word;
+      }
+
+      /* Small devices (tablets, 768px and up) */
+      /* @media (min-width: @screen-sm-min) { ... } */
+
+      /* Medium devices (desktops, 992px and up) */
+      /* @media (min-width: @screen-md-min) { ... } */
+
+      /* Large devices (large desktops, 1200px and up) */
+      /* @media (min-width: @screen-lg-min) { ... } */
+
+      #scrolly__section {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        /* background-color: #f3f3f3; */
+        padding: 1rem;
+      }
+
+      #scrolly__section > * {
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+      }
+
+      .scrolly__content {
+        position: relative;
+        padding: 0 1rem;
+        width: 100%;
+      }
+
+      .scrolly__chart {
+        position: -webkit-sticky;
+        position: sticky;
+        width: 100%;
+        margin: 0;
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        z-index: 0;
+      }
+
+      .scrolly__chart iframe {
+        width: 100%;
+        height: 100%;
+      }
+
+      .step {
+        margin: 0 auto 2rem auto;
+        border: 2px solid #104e8b;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+      }
+
+      .step:last-child {
+        margin-bottom: 0;
+      }
+
+      .text-block.is-active {
+        background-color: goldenrod;
+        color: #3b3b3b;
+      }
+
+      .text-block {
+        background-color: salmon;
+      }
+
+      .step p {
+        text-align: center;
+        padding: 1rem;
+      }
+
+      iframe {
+        border: unset;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-7 col-11">
+            <p class="text-body-2 mb-5">
+              In response to COVID-19, demand for latex gloves, disposable
+              masks, gowns, and other personal protective equipment (PPE) has
+              multiplied. When masks turn out to be a daily necessity for health
+              protection, discarded masks have become one of the most common
+              items in plastic waste, triggering serious concerns on ocean
+              plastic pollution.
+            </p>
+            <figure>
+              <img
+                src="https://oceanconservancy.org/wp-content/uploads/2017/03/Copy-of-TrinidadTobago_Dec2020_creditKeegan-Callender.-61-1.jpg"
+                alt="placeholder"
+                width="100%"
+                class="mb-5 py-2"
+              />
+            </figure>
+
+            <p class="text-body-2 mb-5">
+              In 2020, OceansAsia, a marine conservation organization based in
+              Hong Kong, published an
+              <a href="https://oceansasia.org/covid-19-facemasks/"
+                >official report</a
+              >
+              emphasizing primarily on the worsening marine plastic pollution
+              issues under the impact of pandemic. According to the report,
+              researchers have estimated that by the end of 2020, a total of
+              1.56 billion face masks will have entered oceans around the globe,
+              which could equate to 6,240 tons of plastic pollution at maximum.
+            </p>
+
+            <p class="text-body-2 mb-5">
+              OceansAsia
+              <a href="https://oceansasia.org/beach-mask-coronavirus/"
+                >noted this phenomenon</a
+              >
+              in February 2020 — around one month after the Centers for Disease
+              Control and Prevention (CDC) reported the
+              <a href="https://oceansasia.org/beach-mask-coronavirus/"
+                >first confirmed case of COVID-19</a
+              >
+              on Jan. 20, 2020. Since the pandemic hit, the PPE wastes collected
+              along the coasts in the United States reached an unprecedented
+              level — largely resulting from indiscriminate disposal.
+            </p>
+
+            <h3 class="text-h2 font-secondary mb-3">
+              The United States: A Major Contributor to the Ocean Plastic Crisis
+            </h3>
+
+            <div
+              class="flourish-embed flourish-chart mt-3"
+              data-src="visualisation/11890736"
+            ></div>
+
+            <p class="text-body-2 mb-5">
+              From a universal viewpoint, the by-product of the pandemic — for
+              instance, slackened fisheries economies and reduced consumption of
+              seafood — have brought a measure of positive impact on marine
+              biodiversity recovery. Yet, a fundamental reform of the general
+              trend of marine
+              <a
+                href="https://www.who.int/teams/health-product-policy-and-standards/assistive-and-medical-technology/medical-devices/ppe/ppe-covid"
+                >environmental degradation
+              </a>
+              has not been achieved overall.
+            </p>
+
+            <p class="text-body-2 mb-5">
+              According to the National Academies of Sciences, Engineering and
+              Medicine (NASEM), the United States is taking the top spot as
+              <a
+                href="https://nap.nationalacademies.org/resource/other/dels/plastics-in-the-ocean/"
+                >dominant contributor</a
+              >
+              to global marine plastic crisis in 2016 -- a country that owns
+              only
+              <a
+                href="https://data.worldbank.org/indicator/SP.POP.TOTL?end=2021&locations=US&start=1960&view=chart"
+                >4.25%</a
+              >
+              of the world’s population is generating the most plastic waste of
+              any country around the globe.
+            </p>
+
+            <hr class="line-divider my-5 py-lg-2" />
+
+            <p class="blockquote font-secondary">
+              "People were missing the connection with the outdoors and nature.
+              So it felt like cleanups were therapeutic for them."
+            </p>
+
+            <hr class="line-divider my-5 py-lg-2" />
+
+            <h3 class="text-h2 font-secondary mb-3">
+              Seeking New Opportunities from the Pandemic
+            </h3>
+
+            <p class="text-body-2 mb-4">
+              Today, the International Coastal Cleanup (ICC) is working at its
+              38th year of engaging volunteers from over 100 countries to remove
+              debris from beaches and waterways around the world. As the world’s
+              largest and most well-established organization that is solely
+              dedicated to the wellbeing of the marine environment, ICC and its
+              volunteers are contributing to the world’s largest database on
+              marine debris.
+            </p>
+
+            <p class="text-body-2 mb-4">
+              When the entire world went on pause, gathering groups of
+              volunteers for coastal cleanup seemed unfeasible. The ICC soon
+              shifted to an alternative focus by encouraging people to go out,
+              participate as an individual or with their small family unit, and
+              report their cleanups to Clean Swell, a mobile app designed by the
+              ICC for track down individual efforts.
+            </p>
+
+            <p class="text-body-2 mb-4">
+              “People were itching to get outside, and they were missing that
+              connection with the outdoors and nature,” said Sarah Kollar, the
+              project and outreach manager at the ICC. “Cleanups were almost
+              therapeutic for people.”
+            </p>
+
+            <p class="text-body-2 mb-4">
+              Kollar found that the ICC leaned on the Clean Swell in a big way
+              as COVID started to hit, appreciating its low barrier of entry and
+              applicability for those who wanted to help out the ocean through
+              cleanup.
+            </p>
+
+            <p class="text-body-2 mb-4">
+              “You didn't even have to be on a coast,” Kollar said. “Just
+              collecting what you could find can make people feel like they’re
+              doing something good for the environment and reconnecting with
+              nature that way.”
+            </p>
+
+            <p class="text-body-2 mb-4">
+              Given the pandemic and the influx of disposable masks and gloves,
+              a new category — “Masks & Gloves (PPE)” — was added to ICC’s
+              dataset in the beginning of August 2020. “Our partners immediately
+              started flagging that they were finding disposable masks and latex
+              gloves on the sidewalks, neighborhoods, streets, and their local
+              waterways,” Kollar said. “We tried to pivot as quickly as we
+              could.”
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid" id="root">
+        <div class="row justify-content-center" id="scrolly__section">
+          <div class="col-4 scrolly__content">
+            <div class="step" data-step="1">
+              <div class="text-block pa-2">
+                <p class="text-body-2">#1</p>
+                <p>
+                  Starting in August 2020, as state governments imposed mask
+                  mandates on the basis of all public activity, the widespread
+                  consumption of single-use masks and gloves has led to a
+                  skyrocketing surge of improperly disposed pandemic wastes.
+                </p>
+
+                <p>
+                  From 2017 to 2019, California volunteer groups found 24 pieces
+                  of PPE altogether. However, the total PPE wastes surged to
+                  more than 14,000 in 2020.
+                </p>
+              </div>
+            </div>
+            <div class="step" data-step="2">
+              <div class="text-block pa-2">
+                <p class="text-body-2">#2</p>
+                <p class="text-body-2">
+                  In California, the monthly collected PPE wastes had reached
+                  its highest in September, 2020, for about 9,100 items in
+                  total. This was one month after ICC added the "Masks & Gloves"
+                  category to its dataset.
+                </p>
+
+                <p class="text-body-2">
+                  In the following year, volunteers in the states collected for
+                  an average of 2,088 PPE-related wastes per month.
+                </p>
+              </div>
+            </div>
+            <div class="step" data-step="3">
+              <div class="text-block pa-2">
+                <p class="text-body-2">#3</p>
+                <p class="text-body-2">
+                  Similarly in Texas, a sudden spike of masks and gloves joined
+                  the day-to-day detritus in the state’s ocean ecosystems in
+                  2020, and continued to grow over the following years.
+                </p>
+              </div>
+            </div>
+            <div class="step" data-step="4">
+              <div class="text-block pa-2">
+                <p class="text-body-2">#4</p>
+                <p class="text-body-2">
+                  Although there is a considerable discrepancy between
+                  California and Texas in terms of pandemic wastes, the general
+                  trend is applicable to the whole nation: the COVID-19 is
+                  forcing us to rethink the earth's plastic problem.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 scrolly__chart">
+            <iframe
+              scrolling="no"
+              src="https://flo.uri.sh/story/1749816/embed#slide-0"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
+    <script src="https://unpkg.com/intersection-observer"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+    <script src="https://public.flourish.studio/resources/embed.js"></script>
+
+    <!-- This code from here on is derived from the side-by-side code example from the scrollama library which can be found here: https://github.com/russellgoldenberg/scrollama  -->
+    <!-- I tweaked the function for handleStepEnter to accomodate the Flourish story! -->
+
+    <script>
+      var scrolly = d3.select("#scrolly__section");
+      var chart = scrolly.select(".scrolly__chart");
+      var content = scrolly.select(".scrolly__content");
+      var step = content.selectAll(".step");
+
+      // initialize the scrollama
+      var scroller = scrollama();
+
+      // generic window resize listener event
+      function handleResize() {
+        // 1. update height of step elements
+        var stepH = Math.floor(window.innerHeight * 1);
+        step.style("height", stepH + "px");
+
+        var figureHeight = window.innerHeight * 0.75;
+        var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+        chart
+          .style("height", figureHeight + "px")
+          .style("top", figureMarginTop + "px");
+
+        // 3. tell scrollama to update new element dimensions
+        scroller.resize();
+      }
+
+      // scrollama event handlers
+      function handleStepEnter(response) {
+        const textblock = step.select(".text-block");
+
+        // add color to current step only
+        textblock.classed("is-active", function (d, i) {
+          return i === response.index;
+        });
+
+        // update graphic based on step
+        const linkHead = "https://flo.uri.sh/story/1749816/embed#slide-";
+        const slide = response.index;
+
+        d3.select(".scrolly__chart iframe").attr("src", linkHead + slide);
+      }
+
+      function setupStickyfill() {
+        d3.selectAll(".sticky").each(function () {
+          Stickyfill.add(this);
+        });
+      }
+
+      function init() {
+        setupStickyfill();
+        handleResize();
+        scroller
+          .setup({
+            step: "#scrolly__section .scrolly__content .step",
+            offset: 0.7,
+            debug: true,
+          })
+          .onStepEnter(handleStepEnter);
+
+        // setup resize event
+        window.addEventListener("resize", handleResize);
+      }
+
+      init();
+    </script>
+  </body>
+</html>
